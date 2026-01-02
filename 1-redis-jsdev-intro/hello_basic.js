@@ -9,12 +9,12 @@ const client = redis.createClient({
 });
 
 // Run a Redis command, receive response in callback.
-client.set("hello", "world", (err, reply) => {
+client.set("hello_basic", "world_basic", (err, reply) => {
   console.log(reply); // ? OK
 
   // Run a second Redis command now we know that the
   // first one completed.  Again, response in callback.
-  client.get("hello", (getErr, getReply) => {
+  client.get("hello_basic", (getErr, getReply) => {
     console.log(getReply); // ? world
 
     // Quit client and free up resources.

@@ -23,3 +23,14 @@ module.exports = {
   getRecent: async (siteId, metricUnit, timestamp, limit) =>
     impl.getRecent(siteId, metricUnit, timestamp, limit),
 };
+
+// QUIZ > Recall the way we've modeled sorted sets for metric storage.
+// What are the advantages of this storage model?
+
+// ✔ We can efficiently retrieve metrics by minute or by ranges of minutes
+
+// X We can efficiently retrieve a specific range of metrics by measurement value
+
+// ✔ No more than one reading will be stored for a particular value in a given minute
+
+// ✔ Messages can arrive out of order and still remain sorted by minute

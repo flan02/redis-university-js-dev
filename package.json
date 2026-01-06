@@ -9,7 +9,7 @@
   "private": true,
   "scripts": {
     "dev": "./node_modules/nodemon/bin/nodemon.js",
-    "load": "node src/utils/data_loader.js --",
+    "load": "node ./utils/data_loader.js --",
     "lint": "./node_modules/eslint/bin/eslint.js src tests",
     "start": "node ./app.js",
     "test": "jest --no-colors",

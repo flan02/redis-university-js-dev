@@ -15,7 +15,7 @@ const daySeconds = 24 * 60 * 60;
 
 /* eslint-disable no-unused-vars */
 /**
- * Transforms measurement and minute values into the format used for
+ * ? Transforms measurement and minute values into the format used for
  * storage in a Redis sorted set.  Will round measurement to 2 decimal
  * places.  Used in Challenge 2.
  * @param {number} measurement - the measurement value to store.
@@ -28,7 +28,7 @@ const formatMeasurementMinute = (measurement, minuteOfDay) =>
 /* eslint-enable */
 
 /**
- * Transforms a string containing : separated measurement value and
+ * ? Transforms a string containing : separated measurement value and
  * minute of day into an object having keys containing those values.
  * @param {string} measurementMinute - a string containing <measurement>:<minute>
  * @returns {Object} - object containing measurement and minute values.
@@ -43,7 +43,7 @@ const extractMeasurementMinute = (measurementMinute) => {
 };
 
 /**
- * Insert a metric into the database for a given solar site ID.
+ * ? Insert a metric into the database for a given solar site ID.
  * This function uses a sorted set to store the metric.
  * @param {number} siteId - a solar site ID.
  * @param {number} metricValue - the value of the metric to store.
@@ -59,7 +59,7 @@ const insertMetric = async (siteId, metricValue, metricName, timestamp) => {
   const minuteOfDay = timeUtils.getMinuteOfDay(timestamp);
 
   // START Challenge #2
-
+  // | Store the metric in a sorted set with the minute of day as the score
   await client.zaddAsync(
     metricKey,
     minuteOfDay,
@@ -71,7 +71,7 @@ const insertMetric = async (siteId, metricValue, metricName, timestamp) => {
 };
 
 /**
- * Get a set of metrics for a specific solar site on a given day.
+ * ? Get a set of metrics for a specific solar site on a given day.
  * @param {number} siteId - the ID of a solar site.
  * @param {string} metricUnit - the name of the metric to get values for.
  * @param {number} timestamp - UNIX timestamp for the date to get values for.

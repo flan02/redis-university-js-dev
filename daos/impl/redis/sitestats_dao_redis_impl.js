@@ -35,7 +35,7 @@ const remap = (siteStatsHash) => {
 };
 
 /**
- * Gets the site stats for the supplied site ID for the date specified
+ * ? Gets the site stats for the supplied site ID for the date specified
  * by the timestamp parameter.
  *
  * @param {number} siteId - the site ID to get site stats for.
@@ -55,7 +55,7 @@ const findById = async (siteId, timestamp) => {
 
 /* eslint-disable no-unused-vars */
 /**
- * Updates the site stats for a specific site with the meter
+ * ? Updates the site stats for a specific site with the meter
  * reading data provided.
  *
  * @param {Object} meterReading - a meter reading object.
@@ -111,10 +111,12 @@ const updateBasic = async (meterReading) => {
 
   const maxCapacity = await client.hgetAsync(key, "maxCapacity");
   const readingCapacity = meterReading.whGenerated - meterReading.whUsed;
+
   if (maxCapacity === null || readingCapacity > parseFloat(maxCapacity)) {
     await client.hsetAsync(key, "maxCapacity", readingCapacity);
   }
 };
+
 /* eslint-enable */
 
 module.exports = {

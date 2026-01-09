@@ -3,7 +3,7 @@ const redis = require("../redis_client");
 let sha;
 
 /**
- * Get the Lua source code for the script.
+ * * Get the Lua source code for the script.
  * @returns {string} - Lua source code for the script.
  * @private
  */

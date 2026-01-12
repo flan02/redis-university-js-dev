@@ -117,7 +117,7 @@ const findAll = async () => {
 
   return sites;
   //return [];
-  // END CHALLENGE #1
+  // * END CHALLENGE #1
 };
 /* eslint-enable */
 

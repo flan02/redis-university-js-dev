@@ -58,16 +58,17 @@ const insertMetric = async (siteId, metricValue, metricName, timestamp) => {
   const metricKey = keyGenerator.getDayMetricKey(siteId, metricName, timestamp);
   const minuteOfDay = timeUtils.getMinuteOfDay(timestamp);
 
-  // START Challenge #2
+  // * START Challenge #2
   // | Store the metric in a sorted set with the minute of day as the score
   await client.zaddAsync(
     metricKey,
     minuteOfDay,
     formatMeasurementMinute(metricValue, minuteOfDay)
   );
-  await client.expireAsync(metricKey, metricExpirationSeconds);
 
-  // END Challenge #2
+  await client.expireAsync(metricKey, metricExpirationSeconds);
+  // Note that you can also use a pipeline to send both of these commands to Redis in a single round trip
+  // * END Challenge #2
 };
 
 /**

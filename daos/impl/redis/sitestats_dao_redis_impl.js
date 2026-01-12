@@ -71,14 +71,43 @@ const updateOptimized = async (meterReading) => {
   // Load script if needed, uses cached SHA if already loaded.
   await compareAndUpdateScript.load();
 
-  // START Challenge #3
-  // END Challenge #3
+  // * START Challenge #3
+  const transaction = client.multi();
+
+  transaction.hset(key, "lastReportingTime", timeUtils.getCurrentTimestamp());
+  transaction.hincrby(key, "meterReadingCount", 1);
+  transaction.expire(key, weekSeconds);
+
+  transaction.evalsha(
+    compareAndUpdateScript.updateIfGreater(
+      key,
+      "maxWhGenerated",
+      meterReading.whGenerated
+    )
+  );
+  transaction.evalsha(
+    compareAndUpdateScript.updateIfLess(
+      key,
+      "minWhGenerated",
+      meterReading.whGenerated
+    )
+  );
+  transaction.evalsha(
+    compareAndUpdateScript.updateIfGreater(
+      key,
+      "maxCapacity",
+      meterReading.whGenerated - meterReading.whUsed
+    )
+  );
+
+  await transaction.execAsync();
+  // * END Challenge #3
 };
 /* eslint-enable */
 
 /* eslint-disable no-unused-vars */
 /**
- * Updates the site stats for a specific site with the meter
+ * ? Updates the site stats for a specific site with the meter
  * reading data provided.
  *
  * @param {Object} meterReading - a meter reading object.
@@ -121,5 +150,6 @@ const updateBasic = async (meterReading) => {
 
 module.exports = {
   findById,
-  update: updateBasic, // updateOptimized
+  // update: updateBasic,
+  update: updateOptimized,
 };

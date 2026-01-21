@@ -1,11 +1,12 @@
 const daoLoader = require("./daoloader");
 
 // Change 'site_geo' to 'site' to revert to using 'site_dao_redis_impl.js'.
-const impl = daoLoader.loadDao("site_geo");
+// const impl = daoLoader.loadDao("site_geo");
+const impl = daoLoader.loadDao("site");
 
 module.exports = {
   /**
-   * Insert a new site.
+   * ? Insert a new site.
    *
    * @param {Object} site - a site object.
    * @returns {Promise} - a Promise, resolving to the string value
@@ -14,7 +15,7 @@ module.exports = {
   insert: async (site) => impl.insert(site),
 
   /**
-   * Get the site object for a given site ID.
+   * ? Get the site object for a given site ID.
    *
    * @param {number} id - a site ID.
    * @returns {Promise} - a Promise, resolving to a site object.
@@ -22,16 +23,16 @@ module.exports = {
   findById: async (id) => impl.findById(id),
 
   /**
-   * Get an array of all site objects.
+   * ? Get an array of all site objects.
    *
    * @returns {Promise} - a Promise, resolving to an array of site objects.
    */
   findAll: async () => impl.findAll(),
 
   /**
-   * Get an array of sites within a radius of a given coordinate.
+   * ? Get an array of sites within a radius of a given coordinate.
    *
-   * For week 3.
+   * * For week 3.
    *
    * @param {number} lat - Latitude of the coordinate to search from.
    * @param {number} lng - Longitude of the coordinate to search from.
@@ -43,10 +44,10 @@ module.exports = {
     impl.findByGeo(lat, lng, radius, radiusUnit),
 
   /**
-   * Get an array of sites where capacity exceeds consumption within
+   * ? Get an array of sites where capacity exceeds consumption within
    * a radius of a given coordinate.
    *
-   * For week 3.
+   * * For week 3.
    *
    * @param {number} lat - Latitude of the coordinate to search from.
    * @param {number} lng - Longitude of the coordinate to search from.

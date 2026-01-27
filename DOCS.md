@@ -34,3 +34,20 @@ Use a transaction when...
 
 - ZREM removes one or more members from a sorted set
 - As example, ZREMRANGEBYRANK removes all members in a given rank range
+
+## XADD (Adding entries to a stream)
+
+- XADD appends a new entry to a stream
+- The ID is composed of a millisecond time part and a sequence number
+- You can specify * to have Redis generate an ID for you
+- You can also specify your own ID, but it must be greater than the last ID in the stream
+
+XADD(stream-name)(ID)(field-value pairs)
+
+## XRANGE and XREVRANGE (Reading entries from a stream)
+
+- XRANGE returns entries in a stream within a given range of IDs
+- XREVRANGE returns entries in reverse order
+- Both commands support the COUNT option to limit the number of entries returned
+
+XRANGE(stream-name)(start-ID)(end-ID)(COUNT count)

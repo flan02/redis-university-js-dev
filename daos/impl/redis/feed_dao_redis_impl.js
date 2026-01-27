@@ -5,6 +5,7 @@ const globalMaxFeedLength = 10000;
 const siteMaxFeedLength = 2440;
 
 /**
+ * ? HELPER FUNCTION
  * Takes an object and returns an array whose elements are alternating
  * keys and values from that object.  Example:
  *
@@ -30,6 +31,7 @@ const objectToArray = (obj) => {
 };
 
 /**
+ * ? HELPER FUNCTION
  * Takes an array and returns an object whose keys and values are taken
  * from alternating elements in the array.  Example:
  *
@@ -122,24 +124,27 @@ const insert = async (meterReading) => {
   const client = redis.getClient();
   const pipeline = client.batch();
 
-  // START Challenge #6
+  // * START Challenge #6
+
+  // ? When adding new entries to each stream, be sure to use the MAXLEN and ~ arguments to trim the stream to an approximate number of entries.
+
   pipeline.xadd(
     keyGenerator.getGlobalFeedKey(),
     "MAXLEN",
     "~",
-    globalMaxFeedLength,
+    globalMaxFeedLength, // defined at the top of this file
     "*",
-    ...fields
+    ...fields,
   );
   pipeline.xadd(
     keyGenerator.getFeedKey(meterReading.siteId),
     "MAXLEN",
     "~",
-    siteMaxFeedLength,
+    siteMaxFeedLength, // defined at the top of this file
     "*",
-    ...fields
+    ...fields,
   );
-  // END Challenge #6
+  // * END Challenge #6
 
   await pipeline.execAsync();
 };

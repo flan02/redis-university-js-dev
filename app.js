@@ -34,8 +34,8 @@ app.listen(port, () => {
   banner();
   logger.info(
     `RediSolar listening on port ${port}, using database: ${config.get(
-      "application.dataStore"
-    )}`
+      "application.dataStore",
+    )}`,
   );
 });
 
@@ -43,3 +43,7 @@ app.listen(port, () => {
 module.exports = {
   app,
 };
+
+// npm run test -t tests/file.js -> (FOR TESTING PURPOSES)
+
+// npm run load redis-university-js-dev/$PATH flushdb -> (FOR LOADING SAMPLE DATA)

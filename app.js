@@ -44,6 +44,6 @@ module.exports = {
   app,
 };
 
-// npm run test -t tests/file.js -> (FOR TESTING PURPOSES)
+// npm run test -t tests/[FILE] -> (FOR TESTING PURPOSES)
 
 // npm run load redis-university-js-dev/$PATH flushdb -> (FOR LOADING SAMPLE DATA)

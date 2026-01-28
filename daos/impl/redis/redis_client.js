@@ -4,8 +4,8 @@ const bluebird = require("bluebird");
 const config = require("better-config");
 
 // Add extra definitions for RedisTimeSeries commands.
-redis.addCommand("ts.add"); // redis.ts_addAsync
-redis.addCommand("ts.range"); // redis.ts_rangeAsync
+redis.addCommand("ts.add"); // * redis.ts_addAsync
+redis.addCommand("ts.range"); // *redis.ts_rangeAsync
 
 // Promisify all the functions exported by node_redis.
 bluebird.promisifyAll(redis);

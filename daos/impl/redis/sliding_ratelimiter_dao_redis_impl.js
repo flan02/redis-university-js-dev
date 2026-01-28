@@ -10,9 +10,39 @@ const timeUtils = require("../../../utils/time_utils");
 const hitSlidingWindow = async (name, opts) => {
   const client = redis.getClient();
 
-  // START Challenge #7
-  return -2;
-  // END Challenge #7
+  // * START Challenge #7
+  //return -2;
+  const key = keyGenerator.getKey(
+    `limiter:${opts.interval}:${name}:${opts.maxHits}`,
+  );
+  const now = timeUtils.getCurrentTimestampMillis();
+
+  const transaction = client.multi();
+
+  const member = `${now}-${Math.random()}`;
+
+  transaction.zadd(key, now, member); // Add current hit.
+  transaction.zremrangebyscore(key, 0, now - opts.interval); // Remove old hits.
+  transaction.zcard(key); // Get current hit count.
+  //transaction.expire(key, Math.ceil(opts.interval / 1000) + 1); // Set expiry.
+
+  const response = await transaction.execAsync();
+
+  const hits = parseInt(response[2], 10);
+
+  let hitsRemaining;
+
+  if (hits > opts.maxHits) {
+    // Too many hits.
+    hitsRemaining = -1;
+  } else {
+    // Return number of hits remaining.
+    hitsRemaining = opts.maxHits - hits;
+  }
+
+  return hitsRemaining;
+
+  // * END Challenge #7
 };
 
 /* eslint-enable */

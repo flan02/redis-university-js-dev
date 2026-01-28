@@ -47,3 +47,5 @@ module.exports = {
 // npm run test -t tests/[FILE] -> (FOR TESTING PURPOSES)
 
 // npm run load redis-university-js-dev/$PATH flushdb -> (FOR LOADING SAMPLE DATA)
+
+// daos/metric_dao.js - Week 4, change this from 'metric' to 'metric_ts'.

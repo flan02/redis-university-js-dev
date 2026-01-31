@@ -1,6 +1,8 @@
-# redis-university-js-dev
+# Redis U niversity Javascript Developer
 
-Learning path of  Redis for Javascript developers
+## I've got a new certificate
+
+[Redis-certificate](https://github.com/flan02/flan02/blob/main/cv-danchanivet-EN2026.pdf)
 
 ## Redis cloud
 

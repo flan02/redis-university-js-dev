@@ -2,7 +2,7 @@
 
 ## I've got a new certificate
 
-[Redis-certificate](https://github.com/flan02/flan02/blob/main/cv-danchanivet-EN2026.pdf)
+[Redis-certificate](https://github.com/flan02/redis-university-js-dev/blob/main/public/redis-javascript-developer.png)
 
 ## Redis cloud
 
